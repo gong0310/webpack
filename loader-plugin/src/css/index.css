@@ -1,0 +1,8 @@
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    background-image: url('../images/empty.png');
+    background-size: cover;
+    display: flex;
+}

@@ -1,0 +1,4 @@
+# 此文件类似 .gitignore。忽略哪些文件
+# 忽略dist目录下所有文件
+dist
+src/main.js

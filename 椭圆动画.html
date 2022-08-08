@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body,
+    html {
+      height: 100%;
+
+    }
+
+    body {
+      width: 100%;
+    }
+
+    .bbox {
+      width: 600px;
+      height: 600px;
+      /* border: 1px solid #000; */
+      margin: 100px auto;
+      position: relative;
+      transform: rotateX(-60deg);
+    }
+
+    .box {
+      width: 400px;
+      height: 400px;
+      margin: 0 auto;
+      position: relative;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      animation: one 10s linear infinite;
+    }
+
+    .box .pic1 {
+      width: 80px;
+      height: 80px;
+      text-align: center;
+      transform-origin: center 20%;
+      position: absolute;
+      animation: one1 10s linear infinite;
+      background-color: red;
+
+    }
+
+    .box #yuan1 {
+      top: -10px;
+      left: 0;
+      margin: auto;
+      right: 0px;
+
+    }
+
+    .box #yuan5 {
+      right: -30px;
+      top: 120px;
+    }
+
+    .box #yuan6 {
+      left: -30px;
+      top: 120px;
+    }
+
+    .box #yuan7 {
+      left: 30px;
+      bottom: -20px;
+    }
+
+    .box #yuan8 {
+      right: 30px;
+      bottom: -20px;
+    }
+
+    @keyframes one {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes one1 {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="bbox">
+    <div class="box">
+      <div class="pic1" id="yuan1">1</div>
+      <div class="pic1" id="yuan5">5</div>
+      <div class="pic1" id="yuan6">6</div>
+      <div class="pic1" id="yuan7">7</div>
+      <div class="pic1" id="yuan8">8</div>
+    </div>
+  </div>
+</body>
+
+</html>
