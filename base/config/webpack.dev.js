@@ -113,7 +113,7 @@ module.exports = {
           // },
           {
             test: /\.js$/,
-            exclude: /(node_modules|bower_components)/, //排除node_modules和bower_components下的文件不处理
+            exclude: /(node_modules|bower_components)/, //排除node_modules(这些文件是不需要编译可以直接使用的)和bower_components下的文件不处理
             // include: path.resolve(__dirname, "../src"), // 只处理src下文件。include、exclude不能同时用，报错
             use: {
               loader: "babel-loader",
@@ -136,11 +136,14 @@ module.exports = {
     // new ESLintWebpackPlugin({ // 加入后，如果不规范会报错并中止打包
     //   // 指定检查文件的根目录
     //   context: path.resolve(__dirname, "../src"),
-    //   exclude: "node_modules", //排除node_modules下的文件不处理。默认
+    //   exclude: "node_modules", //排除node_modules下的文件不处理。默认，这些文件是不需要编译可以直接使用的
     //   cache: true, // 开启缓存
     //   // 缓存目录
     //   cacheLocation: path.resolve(__dirname,"../node_modules/.cache/.eslintcache"),
     // }),
+
+    // 每次打包时 js 文件都要经过 Eslint 检查 和 Babel 编译，速度比较慢。
+    // 我们可以缓存之前的 Eslint 检查 和 Babel 编译结果，这样第二次打包时速度就会更快了
 
     new webpack.ProgressPlugin({
       //webpack内置打包进度插件

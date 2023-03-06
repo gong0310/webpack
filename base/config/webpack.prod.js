@@ -1,18 +1,17 @@
 // 生产环境配置文件
 // 优化打包构建速度
-      // oneOf
-      // babel/eslint缓存
-      // 多线程打包
-      // externals
-      // code split，cacheGroups分开单独打包
-      // runtime辅助/公共代码 提取
+// oneOf
+// babel/eslint缓存
+// 多线程打包
+// externals
+// code split，cacheGroups分开单独打包
+// runtime辅助/公共代码 提取
 
 // 优化代码运行的性能
-      // 缓存(hash-chunkhash-contenthash)
-      // tree shaking 去无用代码,减少打包体积。前提：production，使用es6模块化。wwebpack5比webpack4更强大，因为webpack4里面文件嵌套引入层级多了，就识别不出来
-      // 懒加载/预加载
-      // pwa 渐进式网络应用程序
-
+// 缓存(hash-chunkhash-contenthash)
+// tree shaking 去无用代码,减少打包体积。前提：production，使用es6模块化。wwebpack5比webpack4更强大，因为webpack4里面文件嵌套引入层级多了，就识别不出来
+// 懒加载/预加载
+// pwa 渐进式网络应用程序
 
 const os = require("os");
 const path = require("path"); //nodejs核心模块，专门处理路径问题
@@ -31,7 +30,7 @@ const TerserPlugin = require("terser-webpack-plugin"); // 内置就有，html压
 
 // const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const PreloadWebpackPlugin = require("@vue/preload-webpack-plugin"); // 提前加载资源
-const WorkboxPlugin  = require("workbox-webpack-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 // 封装，获取处理样式的Loaders
 const getStyleLoaders = (preProcessor) => {
@@ -88,7 +87,7 @@ module.exports = {
       //loader的配置
       {
         // 打包时每个文件都会经过所有 loader 处理，虽然因为 test 正则原因实际没有处理上，但是都要过一遍。比较慢
-        // oneOf: 每个文件只能被其中一个loader配置处理
+        // oneOf: 每个文件只能被其中一个loader配置处理，剩下的就不匹配了
         oneOf: [
           {
             test: /\.css$/i, //只检测.css结尾的文件
@@ -148,7 +147,8 @@ module.exports = {
           // },
           {
             test: /\.js$/,
-            exclude: /(node_modules|bower_components)/, //排除node_modules和bower_components下的文件不处理
+            exclude: /(node_modules|bower_components)/,
+            // 排除node_modules和bower_components下的文件不处理，这些文件是不需要编译可以直接使用的
             // include: path.resolve(__dirname, "../src"), // 只处理src下文件。include、exclude不能同时用，报错
             use: [
               {
@@ -179,12 +179,14 @@ module.exports = {
     // new ESLintWebpackPlugin({ // 加入后，如果不规范会报错并中止打包
     //   // 指定检查文件的根目录
     //   context: path.resolve(__dirname, "../src"),
-    //   exclude: "node_modules", //排除node_modules下的文件不处理。默认
+    //   exclude: "node_modules", //排除node_modules下的文件不处理。默认，这些文件是不需要编译可以直接使用的
     //   cache: true, // 开启缓存
     //   // 缓存目录
     //   cacheLocation: path.resolve(__dirname,"../node_modules/.cache/.eslintcache"),
     //   threads, // 开启多进程
     // }),
+    // 每次打包时 js 文件都要经过 Eslint 检查 和 Babel 编译，速度比较慢。
+    // 我们可以缓存之前的 Eslint 检查 和 Babel 编译结果，这样第二次打包时速度就会更快了
 
     new webpack.ProgressPlugin({
       //webpack内置打包进度插件
@@ -221,6 +223,7 @@ module.exports = {
       as: "script",
       // rel: 'prefetch' // prefetch兼容性更差
       // Preload只能加载当前页面需要使用的资源，Prefetch可以加载当前页面资源，也可以加载下一个页面需要使用的资源。
+      // Preload：告诉浏览器立即加载资源。Prefetch：告诉浏览器在空闲时才开始加载资源。
     }),
     new WorkboxPlugin.GenerateSW({
       // 这些选项帮助快速启用 ServiceWorkers
