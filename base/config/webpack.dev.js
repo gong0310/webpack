@@ -42,8 +42,8 @@ module.exports = {
             test: /\.css$/i, //只检测.css结尾的文件
             // 执行顺序：从右到左（从下到上）
             use: [
-              "style-loader", //将js中css通过插件style标签添加到html中生效
-              "css-loader", //将css资源编译成commonjs的模块到js中
+              "style-loader", //会动态创建一个 Style 标签，里面放置 Webpack 中 Css 模块内容
+              "css-loader", //负责将 Css 文件编译成 Webpack 能识别的模块
               // css-loader 会对 @import 和 url() 进行处理，就像 js 解析 import/require() 一样。
             ],
           },
@@ -55,7 +55,7 @@ module.exports = {
               //使用多个loader
               "style-loader",
               "css-loader",
-              "sass-loader",
+              "less-loader", // 负责将 Less 文件编译成 Css 文件
             ],
           },
           {
@@ -67,6 +67,7 @@ module.exports = {
               "css-loader",
               // 将 Sass 编译成 CSS
               "sass-loader",
+              // npm i sass-loader sass -D，因为sass-loader 依赖 sass 进行编译
             ],
           },
           {

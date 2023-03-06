@@ -36,9 +36,9 @@ const WorkboxPlugin = require("workbox-webpack-plugin");
 const getStyleLoaders = (preProcessor) => {
   return [
     // 执行顺序：从右到左（从下到上）
-    // "style-loader", // 将 JS 字符串生成为 style 节点
-    MiniCssExtractPlugin.loader, // CSS 提取到单独的文件，而不是style标签
-    "css-loader", //将css资源编译成commonjs的模块到js中
+    // "style-loader", // 会动态创建一个 Style 标签，里面放置 Webpack 中 Css 模块内容
+    MiniCssExtractPlugin.loader, // CSS 提取到单独的文件，而不是style标签，单独的 Css 文件，通过 link 标签加载性能才好
+    "css-loader", //负责将 Css 文件编译成 Webpack 能识别的模块
     {
       loader: "postcss-loader",
       options: {
