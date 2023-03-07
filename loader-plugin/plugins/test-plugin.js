@@ -74,3 +74,8 @@ module.exports = TestPlugin;
 // 资源的具体处理都是在Compilation中完成的，Compilation对资源进行各种各样的处理，
 // 处理完之后，如果是多入口，又会进来Compilation进行处理。所以Compilation可以触发多次。
 // 最后将资源输出出去
+
+
+// 作用：可以扩展 webpack，拥有更强的构建能力，加入自定义的构建行为。
+
+// loader运行在打包文件之前；plugins在整个编译周期都起作用，可以解决loader无法实现的功能 
