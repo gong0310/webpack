@@ -17,3 +17,6 @@ module.exports = function (content, map, meta) {
 
 // 一是loader有执行上下文(context)，也就是通过this访问内置的属性和方法，以实现特定的功能；
 // 二是loader的return语句不一定有返回。
+
+
+// 作用：帮助 webpack 将不同类型的文件转换为 webpack 可识别的模块
